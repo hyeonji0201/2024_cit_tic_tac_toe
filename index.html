@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div id="overlay">
+            <img src="제목.png" alt="게임 제목" id="titleImage">
+        </div>
+        <h1>Tic - Tac - Toe</h1>
+        <!-- 시작 화면 -->
+        <div id="startScreen">
+            <h2>플레이어1: <span id="selectedIconX">선택 안됨</span></h2>
+            <h2>플레이어2: <span id="selectedIconO">선택 안됨</span></h2>
+            <div id="iconSelection" style="display: none;">
+                <h3>아이콘 선택</h3>
+                <div id="icons-row1">
+                    <span class="icon" data-icon="🔴">🔴</span>
+                    <span class="icon" data-icon="🟠">🟠</span>
+                    <span class="icon" data-icon="🟡">🟡</span>
+                    <span class="icon" data-icon="🟢">🟢</span>
+                    <span class="icon" data-icon="🔵">🔵</span>
+                    <span class="icon" data-icon="🟣">🟣</span>
+                    <span class="icon" data-icon="🟤">🟤</span>
+                    <span class="icon" data-icon="⚫">⚫</span>
+                    <span class="icon" data-icon="⚪">⚪</span>
+                </div>
+                <!-- 두 번째 줄 아이콘 -->
+                <div id="icons-row2">
+                    <span class="icon" data-icon="🟥">🟥</span>
+                    <span class="icon" data-icon="🟧">🟧</span>
+                    <span class="icon" data-icon="🟨">🟨</span>
+                    <span class="icon" data-icon="🟩">🟩</span>
+                    <span class="icon" data-icon="🟦">🟦</span>
+                    <span class="icon" data-icon="🟪">🟪</span>
+                    <span class="icon" data-icon="🟫">🟫</span>
+                    <span class="icon" data-icon="⬛">⬛</span>
+                    <span class="icon" data-icon="⬜">⬜</span>
+                </div>
+                <span id="confirmIconX" style="display: none;" class="buttons">플레이어 1 선택 완료</span>
+                <div id="player2Selection" style="display: none;">
+                    <span id="confirmIconO" style="display: none;" class="buttons">플레이어 2 선택 완료</span>
+                </div>
+            </div>
+            <div id="spanContainer">
+                <span id="rulesBtn" class="buttons" style="margin-right: 10px; margin-left: 10px;">?</span>
+                <span id="startGameBtn" class="buttons" style="margin-right: 10px; margin-left: 10px;">게임 시작</span>
+                <span id="chooseIconBtn" class="buttons" style="margin-right: 10px; margin-left: 10px;">아이콘 설정</span>
+            </div>
+            <p id="rulesMessage" style="display: none;"></p> <!-- 게임 방법 메시지 -->
+        </div>
+
+        <!-- 점수판 -->
+        <div id="scoreboard" style="display: none;">
+            <p id="message"></p>
+            <p>플레이어1(<span id="iconX"></span>): <span id="playerXScore">0</span></p>
+            <p>플레이어2(<span id="iconO"></span>): <span id="playerOScore">0</span></p>
+        </div>
+
+        <!-- 틱택토 게임판 -->
+        <div id="board" style="display: none;">
+            <div class="cell" data-index="0"></div>
+            <div class="cell" data-index="1"></div>
+            <div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div>
+            <div class="cell" data-index="4"></div>
+            <div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div>
+            <div class="cell" data-index="7"></div>
+            <div class="cell" data-index="8"></div>
+        </div>
+
+        <!-- 다시 시작 버튼 -->
+        <span id="restartBtn" class="buttons" style="display: none;">Restart</span>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
