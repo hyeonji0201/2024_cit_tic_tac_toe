@@ -104,6 +104,9 @@ span {
     padding: 20px;
     font-weight: bold;
 }
+.buttons:hover{
+    background-color: rgba(102, 178, 255, 0.5);
+}
 p{
     font-weight: bold;
 }
