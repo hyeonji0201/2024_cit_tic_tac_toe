@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const playerXScore = document.getElementById('playerXScore');
     const playerOScore = document.getElementById('playerOScore');
     const chooseIconBtn = document.getElementById('chooseIconBtn');
-    const spanContainer = document.getElementById('spanContainer'); // spanContainer 추가
+    const spanContainer = document.getElementById('spanContainer');
     
     let player1Icon = 'X';
     let player2Icon = 'O';
@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentPlayer = 'X';
     let boardState = Array(9).fill(null);
     let countdown;
+    let isCountdown = false; // 카운트다운 상태 변수 추가
 
     const showRules = () => {
         rulesMessage.textContent = "게임 방법: 두 플레이어가 차례로 아이콘을 선택하고, 3개의 아이콘을 먼저 가로, 세로, 대각선으로 정렬하면 승리하는 게임입니다. 2판을 먼저 승리할 시 최종 승리합니다.";
@@ -42,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
     chooseIconBtn.addEventListener('click', () => {
         iconSelection.style.display = 'block';
         confirmIconX.style.display = 'block';
-        // 아이콘 선택 버튼 숨기기
         spanContainer.style.visibility = 'hidden';
     });
 
@@ -64,12 +64,9 @@ document.addEventListener("DOMContentLoaded", () => {
             selectedIconO.textContent = player2Icon;
             iconSelection.style.display = 'none';
             confirmIconO.style.display = 'none';
-            // 아이콘 선택 버튼 다시 나타나기
             chooseIconBtn.style.display = 'block';
             rulesBtn.style.display = 'block';
-            
-            // spanContainer 다시 나타나기
-            spanContainer.style.visibility = 'visible'; // 추가된 부분
+            spanContainer.style.visibility = 'visible';
         }
     });
 
@@ -87,20 +84,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const scoreboard = document.getElementById('scoreboard');
 
     startGameBtn.addEventListener('click', () => {
-        // 아이콘이 선택되지 않은 경우 경고
         if (selectedIconX.textContent === '선택 안됨' || selectedIconO.textContent === '선택 안됨') {
             alert("아이콘을 선택한 후 게임을 시작할 수 있습니다.");
-            return; // 아이콘이 선택되지 않았으면 게임 시작을 중단
+            return;
         }
     
-        // 플레이어1과 플레이어2의 아이콘 비교
         if (player1Icon === player2Icon) {
             alert("플레이어1과 플레이어2의 아이콘은 동일할 수 없습니다. 다른 아이콘을 선택해주세요.");
-            selectedIconX.textContent = '선택 안됨'; // 초기화
-            selectedIconO.textContent = '선택 안됨'; // 초기화
-            return; // 함수 종료
+            selectedIconX.textContent = '선택 안됨';
+            selectedIconO.textContent = '선택 안됨';
+            return;
         }
-        // 점수판에 플레이어의 아이콘 표시
         document.getElementById('iconX').textContent = player1Icon;
         document.getElementById('iconO').textContent = player2Icon;
 
@@ -108,6 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
         board.style.display = 'grid';
         scoreboard.style.display = 'block';
     });
+
     const checkWinner = () => {
         const winningCombinations = [
             [0, 1, 2],
@@ -123,11 +118,10 @@ document.addEventListener("DOMContentLoaded", () => {
         for (const combination of winningCombinations) {
             const [a, b, c] = combination;
             if (boardState[a] && boardState[a] === boardState[b] && boardState[a] === boardState[c]) {
-                return boardState[a]; // 승리한 아이콘 반환
+                return boardState[a];
             }
         }
-
-        return boardState.every(cell => cell !== null) ? 'Draw' : null; // 모든 셀이 채워져 있을 경우 무승부 반환
+        return boardState.every(cell => cell !== null) ? 'Draw' : null;
     };
 
     const resetBoard = () => {
@@ -139,6 +133,8 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const handleCellClick = (event) => {
+        if (isCountdown) return; // 카운트다운 중일 때는 클릭 무시
+
         const index = event.target.getAttribute('data-index');
         if (boardState[index] || !startScreen.style.display) return;
 
@@ -167,11 +163,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 startCountdown();
             }
         } else {
-            currentPlayer = currentPlayer === 'X' ? 'O' : 'X'; // 다음 플레이어로 전환
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
         }
     };
 
     const startCountdown = () => {
+        isCountdown = true; // 카운트다운 시작 시 플레이어 입력 금지
         let count = 3;
         messageDisplay.textContent = `${count}..`;
 
@@ -180,7 +177,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (count <= 0) {
                 clearInterval(countdown);
                 resetBoard();
-                messageDisplay.textContent = ''; // 메시지 초기화
+                messageDisplay.textContent = '';
+                isCountdown = false; // 카운트다운 종료 시 입력 허용
             } else {
                 messageDisplay.textContent = `${count}..`;
             }
@@ -203,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
         playerXScore.textContent = player1Wins;
         playerOScore.textContent = player2Wins;
         resetBoard();
-        messageDisplay.textContent = ''; // 메시지 초기화
+        messageDisplay.textContent = '';
     };
 
     document.querySelectorAll('.cell').forEach(cell => {
