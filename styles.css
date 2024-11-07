@@ -13,18 +13,17 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.8); /* 약간 투명한 배경 */
+    background-color: rgba(0, 0, 0, 0.8);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10; /* 다른 요소보다 앞에 위치 */
+    z-index: 10;
     opacity: 1;
     transition: opacity 2s ease; /* 페이드 아웃 효과 */
 }
 
-/* 이미지 중앙 정렬 */
 #titleImage {
-    width: 500px; /* 이미지 크기 */
+    width: 500px;
     opacity: 1;
 }
 .container {
@@ -38,7 +37,7 @@ body {
 #icons-row1, #icons-row2 {
     display: flex;
     justify-content: center;
-    margin: 5px 0; /* 위아래 간격 */
+    margin: 5px 0;
 }
 
 .icon {
@@ -77,19 +76,19 @@ span {
 #iconSelection {
     display: flex;
     flex-direction: column;
-    align-items: center; /* 가운데 정렬 */
-    justify-content: center; /* 가운데 정렬 */
+    align-items: center;
+    justify-content: center;
 }
 
 #confirmIconX,
 #confirmIconO {
-    margin: 10px 0; /* 위아래 여백 추가 */
-    text-align: center; /* 가운데 정렬 */
+    margin: 10px 0; 
+    text-align: center;
     cursor: pointer;
 }
 #spanContainer {
-    display: flex; /* 버튼을 수평으로 배치 */
-    justify-content: center; /* 버튼을 중앙 정렬 */
+    display: flex;
+    justify-content: center;
     position: relative;
     left:30px;
     margin: 20px;
