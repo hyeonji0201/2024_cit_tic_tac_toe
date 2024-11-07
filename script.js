@@ -1,13 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
     const overlay = document.getElementById('overlay');
-
-    // 페이드 아웃 효과 후 오버레이 제거
+    
     setTimeout(() => {
         overlay.style.opacity = '0'; // 페이드 아웃
         setTimeout(() => {
-            overlay.style.display = 'none'; // 완전히 사라지면 클릭 가능하게
-        }, 2000); // 페이드 아웃 시간과 동일하게 설정
-    }, 3000); // 3초 동안 이미지 표시 후 페이드 아웃 시작
+            overlay.style.display = 'none'; // 완전히 사라지면 게임 실행 가능
+        }, 2000);
+    }, 3000); // 3초 동안 이미지 표시 후 페이드 아웃
     const startScreen = document.getElementById('startScreen');
     const iconSelection = document.getElementById('iconSelection');
     const selectedIconX = document.getElementById('selectedIconX');
@@ -133,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const handleCellClick = (event) => {
-        if (isCountdown) return; // 카운트다운 중일 때는 클릭 무시
+        if (isCountdown) return; // 카운트다운 중일 때는 게임 실행 불가
 
         const index = event.target.getAttribute('data-index');
         if (boardState[index] || !startScreen.style.display) return;
@@ -168,7 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const startCountdown = () => {
-        isCountdown = true; // 카운트다운 시작 시 플레이어 입력 금지
+        isCountdown = true;
         let count = 3;
         messageDisplay.textContent = `${count}..`;
 
@@ -178,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 clearInterval(countdown);
                 resetBoard();
                 messageDisplay.textContent = '';
-                isCountdown = false; // 카운트다운 종료 시 입력 허용
+                isCountdown = false;
             } else {
                 messageDisplay.textContent = `${count}..`;
             }
