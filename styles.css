@@ -111,12 +111,12 @@ p{
 }
 @media (orientation: portrait) {
     #titleImage{
-        width: 200px;
+        width: 400px;
     }
     .icon{
-        font-size: 20px;
+        font-size: 25px;
     }
     h1{
-        font-size: 25px
+        font-size: 30px
     }
 }
