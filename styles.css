@@ -109,14 +109,3 @@ span {
 p{
     font-weight: bold;
 }
-@media (orientation: portrait) {
-    #titleImage{
-        width: 400px;
-    }
-    .icon{
-        font-size: 20px;
-    }
-    h1{
-        font-size: 30px
-    }
-}
